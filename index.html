@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .mdiv {
+        display: flex;
+        justify-content: center;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        align-items: center;
+        background-image: url("https://i.gifer.com/embedded/download/9xL3.gif");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .mdiv h1 {
+        color: rgb(91, 91, 243);
+      }
+
+      button,
+      select {
+        height: 30px;
+        width: 12%;
+        background-color: rgb(179, 179, 243);
+        font-size: 15px;
+        margin: 10px;
+        font-weight: bolder;
+      }
+      option {
+        background-color: transparent;
+      }
+
+      button:hover {
+        transform: scale(1.2);
+        font-weight: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <div align="center" class="mdiv">
+      <div class="sub">
+        <h1 align="center">TEXT EDITOR</h1>
+        <div class="dtextarea">
+          <form action="">
+            <textarea
+              autofocus
+              name=""
+              id="txtarea"
+              cols="90"
+              rows="18"
+              min=""
+              max=""
+              onkeypress="updateInfo()"
+            ></textarea>
+          </form>
+        </div>
+
+        <button type="button" onclick="upper()">UpperCase</button>
+        <button type="button" onclick="lower()">LowerCase</button>
+        <button type="button" onclick="bold()">Bold</button>
+        <button type="button" onclick="bolder()">Bolder</button>
+        <button type="button" onclick="incrseFont()">+</button>
+        <button type="button" onclick="decreseFont()">-</button>
+
+        <button type="button" onclick="lighter()">Lighter</button>
+
+        <button type="button" onclick="search()">search</button>
+        <button type="button" onclick="underline()">Underline</button>
+
+        <!-- <select id="fontSizeSelector" onchange="changeFontSize()">
+                <option disabled selected>Choose Font Size</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select> -->
+
+        <!-- color -->
+        <select id="colorSelector" onchange="changeTextColor()">
+          <option disabled selected>Choose Color</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+          <option value="black">Black</option>
+        </select>
+
+        <button type="button" onclick="left()">Left</button>
+        <button type="button" onclick="center()">Center</button>
+        <button type="button" onclick="right()">Right</button>
+
+        <!-- Font family -->
+
+        <select name="" id="fontFamily" onchange="changeFontFamily()">
+          <option disabled selected>Choose Font-family</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+          <option value="Arial">Arial</option>
+        </select>
+
+        <!-- bg color -->
+
+        <select id="bgcolor" onchange="bgcolor()">
+          <option value="" selected disabled>Choose bgColor</option>
+          <option value="gray">Gray</option>
+          <option value="yellow">Yellow</option>
+          <option value="red">red</option>
+          <option value="green">Green</option>
+          <option value="white">White</option>
+        </select>
+
+        <!-- italic -->
+
+        <button type="button" onclick="italic()">Italic</button>
+        <button type="button" onclick="clr()">Clear</button>
+
+        <button type="button" onclick="linethrough()">Line-though</button>
+
+        <button type="button" onclick="removeDecore()">
+          Remove decoration
+        </button>
+
+        <button type="button" onclick="shadow()">Text-shadow</button>
+
+        <h3 id="info">your text contains 0 words and 0 characters</h3>
+      </div>
+    </div>
+
+    <script>
+      let txt = document.getElementById("txtarea");
+
+      function upper() {
+        txt.value = txt.value.toUpperCase();
+      }
+
+      function lower() {
+        txt.value = txt.value.toLowerCase();
+      }
+
+      function bold() {
+        txt.style.fontWeight = "bold";
+      }
+      function bolder() {
+        txt.style.fontWeight = "bolder";
+      }
+
+      function lighter() {
+        txt.style.fontWeight = "lighter";
+      }
+
+      function updateInfo() {
+        let text = txt.value;
+        info.innerHTML = `your text contains ${
+          text.split(" ").length
+        } words and ${text.length} characters`;
+      }
+
+      function incrseFont() {
+        let size = parseInt(window.getComputedStyle(txt).fontSize);
+        txt.style.fontSize = size + 2 + "px";
+      }
+
+      function decreseFont() {
+        let size = parseInt(window.getComputedStyle(txt).fontSize);
+        txt.style.fontSize = size - 2 + "px";
+      }
+
+      function search() {
+        let str = prompt("Enter something to Search ");
+        let text = txt.value;
+
+        if (text.includes(str)) {
+          alert(`Yes ${str} is here`);
+        } else {
+          alert(`${str} is not present.`);
+        }
+      }
+
+      // function changeFontSize() {
+      //     let fontSizeSelector = document.getElementById("fontSizeSelector");
+      //     let selectedSize = fontSizeSelector.value;
+
+      //     if (selectedSize === "small") {
+      //         txt.value.style.fontSize = "12px";
+      //     } else if (selectedSize === "medium") {
+      //         txt.value.style.fontSize = "16px";
+      //     } else if (selectedSize === "large") {
+      //         txt.value.style.fontSize = "20px";
+      //     }
+      // }
+
+      function underline() {
+        txt.style.textDecoration = "underline";
+      }
+
+      function changeTextColor() {
+        let colorSelector = document.getElementById("colorSelector");
+        let selectedColor = colorSelector.value;
+        txt.style.color = selectedColor;
+      }
+
+      function changeFontFamily() {
+        let fontFamily = document.getElementById("fontFamily");
+        let selectedFamily = fontFamily.value;
+
+        txt.style.fontFamily = selectedFamily;
+      }
+
+      function left() {
+        txt.style.textAlign = "left";
+      }
+
+      function right() {
+        txt.style.textAlign = "right";
+      }
+      function center() {
+        txt.style.textAlign = "center";
+      }
+
+      // bg color
+
+      function bgcolor() {
+        let bgcolor = document.getElementById("bgcolor");
+        let selectedbg = bgcolor.value;
+
+        txt.style.backgroundColor = selectedbg;
+      }
+
+      function italic() {
+        txt.style.fontStyle = "italic";
+      }
+
+      function clr() {
+        console.log("helloo");
+        let b = "";
+        txt.value = b;
+      }
+
+      function linethrough() {
+        txt.style.textDecoration = "line-through";
+      }
+
+      function removeDecore() {
+        txt.style.textDecoration = "none";
+      }
+
+      function shadow() {
+        txt.style.textShadow = "6px 6px 10px gray";
+      }
+    </script>
+  </body>
+</html>
